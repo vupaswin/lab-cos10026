@@ -72,7 +72,8 @@
             <p>
                 <label for="tutor">Your Tutor</label>
                 <select id="tutor" name="tutor" required="required">
-                    <option value="">Please Select</option>
+                    <!-- Hidden select to make the dropdown required, it will not be submitted with the form-->
+                    <option value="" hidden>Please Select</option>
                     <option value="Trung Doan">Trung Doan</option>
                     <option value="Nghia Quach">Nghia Quach</option>
                     <option value="Le Tran">Le Tran</option>
@@ -88,20 +89,20 @@
 
             <!-- Checkboxes: HTML ticked/checked by default -->
             <p>
-                <input type="checkbox" id="html" name="issue[]" value="HTML" checked="checked">
                 <label for="html">HTML</label>
+                <input type="checkbox" id="html" name="issue[]" value="HTML" checked="checked">
 
-                <input type="checkbox" id="css" name="issue[]" value="CSS">
                 <label for="css">CSS</label>
+                <input type="checkbox" id="css" name="issue[]" value="CSS">
 
-                <input type="checkbox" id="js" name="issue[]" value="JavaScript">
                 <label for="js">JavaScript</label>
+                <input type="checkbox" id="js" name="issue[]" value="JavaScript">
 
-                <input type="checkbox" id="php" name="issue[]" value="PHP">
                 <label for="php">PHP</label>
+                <input type="checkbox" id="php" name="issue[]" value="PHP">
 
-                <input type="checkbox" id="mysql" name="issue[]" value="MySQL">
                 <label for="mysql">MySQL</label>
+                <input type="checkbox" id="mysql" name="issue[]" value="MySQL">
             </p>
 
             <!-- Description of Issue: textarea with placeholder attribute -->
