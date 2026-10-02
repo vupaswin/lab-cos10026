@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Form</title>
+</head>
+
+<body>
+    <h1>Seminar Feedback Survey</h1>
+    <form id="survey" method="get" action="result.html">
+        <fieldset>
+            <legend>Personal Information</legend>
+            <label for="first-name">First Name:</label>
+            <input type="text" id="first-name" name="first-name" required size = "10" placeholder="FirstName" >
+            <br>
+            <label for="last-name">Last Name:</label>
+            <input type="text" id="last-name" name="last-name" required size = "10" placeholder="LastName" >
+            <br>
+            <label for = "age"> Age </label>
+            <input type = "number" id = "age" name = "age" min = "18" max = "60" required size = "10" placeholder = "Age" >
+            <br>
+            <label for = "pwd"> Password </label>
+            <input type = "password" id = "pwd" name = "pwd" required size = "8" placeholder = "Password" pattern ="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+            title = "Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one special character" >
+            <br>
+        </fieldset>
+        <fieldset>
+            <legend>What did you like about this seminar?</legend>
+            <input type = "checkbox" id = "like1" name = "like1" value = "like1" >
+            <label for = "like1">Great topics and speakers</label>
+            <br>
+            <input type = "checkbox" id = "like2" name = "like2" value = "like2" >
+            <label for = "like2">Good organisation</label>
+            <br>
+            <input type = "checkbox" id = "like3" name = "like3" value = "like3" >
+            <label for = "like3">Good networking opportunities</label>
+            <br>
+            <input type = "checkbox" id = "like4" name = "like4" value = "like4" >
+            <label for = "like4">Other</label>
+            <br>
+            <input type = "text" id = "like4-other" name = "like4-other" size = "10" placeholder = "Other" >
+        </fieldset>
+        <fieldset>
+            <legend>How would you rate the seminar?</legend>
+            <input type = "radio" id = "rating1" name = "rating" value = "rating1" >
+            <label for = "rating1">1</label>
+            <br>
+            <input type = "radio" id = "rating2" name = "rating" value = "rating2" >
+            <label for = "rating2">2</label>
+            <br>
+            <input type = "radio" id = "rating3" name = "rating" value = "rating3" >
+            <label for = "rating3">3</label>
+            <br>
+            <input type = "radio" id = "rating4" name = "rating" value = "rating4" >
+            <label for = "rating4">4</label>
+            <br>
+            <input type = "radio" id = "rating5" name = "rating" value = "rating5" >
+            <label for = "rating5">5</label>
+            <br>
+        </fieldset>
+        <fieldset>
+            <legend>Please provide your suggestions for improvement</legend>
+            <textarea id = "suggestions" name = "suggestions" rows = "4" cols = "50" placeholder = "Suggestions" ></textarea>
+            <br>
+        </fieldset>
+        <p>
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+        </p>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Result</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 0 15px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Survey Submission Received</h1>
+    <p>Dưới đây là các dữ liệu được gửi từ <strong>html5-form.html</strong> để kiểm thử:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Field Name</th>
+                <th>Submitted Value</th>
+            </tr>
+        </thead>
+        <tbody id="result-body"></tbody>
+    </table>
+
+    <p style="margin-top: 20px;"><a href="html5-form.html">&larr; Quay lại form</a></p>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const tbody = document.getElementById("result-body");
+
+        if ([...params.keys()].length === 0) {
+            tbody.innerHTML = '<tr><td colspan="2">Không có dữ liệu gửi lên.</td></tr>';
+        } else {
+            params.forEach((value, key) => {
+                const tr = document.createElement("tr");
+                const tdKey = document.createElement("td");
+                const tdVal = document.createElement("td");
+
+                tdKey.textContent = key;
+                tdVal.textContent = value || "(trống)";
+
+                // Nếu là trường màu sắc thì hiển thị kèm ô xem trước màu
+                if (key === "favColor") {
+                    tdVal.innerHTML = `${value} <span style="display:inline-block;width:14px;height:14px;background-color:${value};border:1px solid #000;vertical-align:middle;margin-left:6px;"></span>`;
+                }
+
+                tr.appendChild(tdKey);
+                tr.appendChild(tdVal);
+                tbody.appendChild(tr);
+            });
+        }
+    </script>
+</body>
+</html>
