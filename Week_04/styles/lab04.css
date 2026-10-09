@@ -1,0 +1,97 @@
+/*
+  filename: lab04.css
+  author: PHAM ANH VU
+  created: 09/10/2026
+  last modified: 09/10/2026
+  description: Stylesheet for lab04.html
+*/
+
+/* Universal selector: set default font and text color */
+* {
+  font-family: calibri, sans-serif;
+  color: #2F4F4F;
+}
+
+/* Element selector: style main heading */
+h1 {
+  color: purple;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+/* Element selector: style subheadings */
+h2 {
+  color: rgb(0, 128, 128);
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+/* Group selector: apply heading font family */
+h1, h2, h3 {
+  font-family: arial, sans-serif;
+}
+
+/* Group selector: italicise aside and footer text */
+aside, footer {
+  font-style: italic;
+}
+
+/* Group selector: add borders to table elements */
+table, th, td {
+  border: 1px solid black;
+}
+
+/* ID selector: center-align the images heading */
+#images {
+  text-align: center;
+}
+
+/* ID selector: highlight specific heading title */
+#heading-title {
+  color: red;
+}
+
+/* Class selector: highlight special character entities */
+.special {
+  color: darkorange;
+  font-weight: bold;
+}
+
+/* Class selector: right-align month table headers */
+.month {
+  text-align: right;
+}
+
+/* Class selector: left-align Jan/Feb */
+#jan,
+#feb {
+  text-align: right !important;
+}
+
+/* Descendant selector: button-style navigation links */
+nav a {
+  text-decoration: none;
+  padding: 0.2em 0.6em;
+  border: 4px solid #ccc;
+}
+
+/* Descendant selector: square bullets for nested list */
+ol ul {
+  list-style-type: square;
+}
+
+/* Pseudo-class: hide aside block on hover */
+aside:hover {
+  display: none;
+}
+
+/* Pseudo-class: navigation link hover effect */
+nav a:hover {
+  background-color: lightblue;
+  border-color: darkblue;
+}
+
+/* Element Selector (Add-ons): the line <hr> should be bolder*/
+hr {
+  border-top: 2px solid black;
+}
