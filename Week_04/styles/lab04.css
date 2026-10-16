@@ -95,3 +95,7 @@ nav a:hover {
 hr {
   border-top: 2px solid black;
 }
+
+li:first-child {
+    color: red;
+}
