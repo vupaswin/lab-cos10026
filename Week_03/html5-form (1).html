@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 Survey Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 0 15px; }
+        fieldset { border: 1px solid #ccc; border-radius: 6px; margin-bottom: 15px; padding: 12px; }
+        legend { font-weight: bold; padding: 0 5px; }
+        label { display: inline-block; min-width: 140px; margin: 6px 0; }
+        input, select, datalist { margin: 4px 0; padding: 4px; vertical-align: middle; }
+        input[type="submit"], input[type="reset"] { padding: 6px 14px; margin-right: 8px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>HTML5 Event & Workshop Survey</h1>
+    <form action="result-htm5.html" method="get">
+        <fieldset>
+            <legend>Participant Information</legend>
+            <label for="fullname">Full Name:</label> 
+            <input type="text" id="fullname" name="fullname" required 
+                   pattern="[A-Za-z\s]{2,50}" 
+                   title="Please enter only letters and spaces (2-50 characters)" 
+                   placeholder="John Doe"><br>
+
+            <label for="studentId">Student ID:</label>
+            <input type="text" id="studentId" name="studentId" required 
+                   pattern="[0-9]{7,10}" 
+                   title="Student ID must be 7 to 10 digits" 
+                   placeholder="104123456"><br>
+
+            <label for="email">Student Email:</label>
+            <input type="email" id="email" name="email" required 
+                   placeholder="student@swin.edu.au"><br>
+
+            <label for="website">Portfolio / URL:</label>
+            <input type="url" id="website" name="website" 
+                   placeholder="https://example.com"><br>
+
+            <label for="phone-num">Phone Number:</label>
+            <input type="tel" id="phone-num" name="phone" required 
+                   pattern="[0-9]{10}" 
+                   title="Phone number must be exactly 10 digits" 
+                   placeholder="0912345678"><br>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Preferences & Feedback</legend>
+            <label for="workshop-time">Session Time:</label>
+            <input type="time" id="workshop-time" name="workshopTime"><br>
+
+            <label for="rating">Satisfaction (1-10):</label>
+            <input type="range" id="rating" name="rating" min="1" max="10" value="8" oninput="this.nextElementSibling.value = this.value">
+            <output>8</output><br>
+
+            <label for="fav-color">Badge Color:</label>
+            <input type="color" id="fav-color" name="favColor" value="#0055ff"><br>
+
+            <label for="topic">Interested Topic:</label>
+            <input list="topics" id="topic" name="topic" placeholder="Select or type topic">
+            <datalist id="topics">
+                <option value="HTML5 & Web API">
+                <option value="CSS3 Modern Layouts">
+                <option value="JavaScript Essentials">
+                <option value="Cyber Security">
+            </datalist><br>
+
+            <label for="file">Project Document:</label>
+            <input type="file" id="file" name="attachment" accept=".pdf,.doc,.docx"><br>
+
+            <label for="search">Keyword Search:</label>
+            <input type="search" id="search" name="keyword" 
+                   pattern="^[A-Za-z0-9\s]{1,30}$" 
+                   title="Từ khóa từ 1-30 ký tự, không chứa ký tự đặc biệt" 
+                   placeholder="Search keywords...">
+        </fieldset>
+
+        <p>
+            <input type="submit" value="Submit Survey">
+            <input type="reset" value="Reset">
+        </p>
+    </form>
+</body>
+</html>

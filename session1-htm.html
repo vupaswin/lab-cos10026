@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 05: CSS Layouts &amp; Interactive Learning Academy</title>
+
+  <!-- Google Fonts: 4 simple font styles to try -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fira+Code:wght@400;600&family=Inter:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Link to our CSS file -->
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+  <!-- ====================================================================
+       STICKY NAVIGATION BAR:
+       Sticks to the top when you scroll down the page.
+       ==================================================================== -->
+  <nav class="sticky-nav">
+    <div class="nav-brand">
+      <span>&#9881;</span> Week 05 Lab
+    </div>
+    <div class="nav-links">
+      <a href="#academy" class="nav-link highlight">&#9733; Duolingo Academy</a>
+      <a href="#fonts" class="nav-link">Fonts</a>
+      <a href="#box-model" class="nav-link">Box Model</a>
+      <a href="#flow" class="nav-link">Block vs Inline</a>
+      <a href="#flexbox" class="nav-link">Flexbox</a>
+      <a href="#grid" class="nav-link">Grid</a>
+      <a href="#positioning" class="nav-link">Positioning</a>
+      <a href="#units" class="nav-link">Units (px, rem)</a>
+      <a href="#images" class="nav-link">Images</a>
+      <a href="#table" class="nav-link">Table</a>
+    </div>
+  </nav>
+
+  <!-- Main container: Centers everything on the screen with nice margins -->
+  <div class="container">
+
+    <!-- Header Section -->
+    <header>
+      <h1>Week 05: CSS Layouts &amp; Interactive Academy</h1>
+      <p>A Duolingo-style coding laboratory! Write real CSS code directly in your browser, test it, and level up.</p>
+      
+      <!-- Shows if you are on a Computer or a Phone screen -->
+      <div style="margin-top: 1rem;">
+        <span class="responsive-status-badge">Screen Mode: </span>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- ==================================================================
+           SECTION: DUOLINGO CSS MASTER ACADEMY
+           Interactive Code Testing with Lessons, Live Editor, XP & Sounds!
+           ================================================================== -->
+      <section id="academy" class="academy-card">
+        
+        <!-- Gamified Top Bar (XP, Level, Streak & Modes) -->
+        <div class="academy-header">
+          <div class="academy-stats">
+            <span class="stat-pill stat-xp" id="stat-xp-display">&#9889; 0 XP</span>
+            <span class="stat-pill stat-level" id="stat-level-display">&#127942; Level 1: Rookie Coder</span>
+            <span class="stat-pill stat-streak">&#128293; Day 1 Streak</span>
+          </div>
+          <div class="academy-mode-tabs">
+            <button type="button" class="mode-tab-btn active" id="tab-lessons-btn" onclick="switchAcademyMode('lessons')">&#128218; Lessons Mode</button>
+            <button type="button" class="mode-tab-btn" id="tab-sandbox-btn" onclick="switchAcademyMode('sandbox')">&#127912; Free Sandbox</button>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+          <div class="progress-info">
+            <span id="progress-text">Lesson 1 of 7</span>
+            <span id="progress-percent">14% Complete</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progress-fill-bar"></div>
+          </div>
+        </div>
+
+        <!-- Duolingo Path: 7 Interactive Lesson Nodes -->
+        <div class="lesson-stepper" id="lesson-stepper-track">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Current Mission Instructions -->
+        <div class="mission-card" id="mission-card-box">
+          <div class="mission-title" id="mission-title-text">
+            <span>&#127919;</span> Lesson 1: The Box Model 🎁
+          </div>
+          <div class="mission-desc" id="mission-desc-text">
+            Your task is to give the box padding (space inside) and a clean border! Set <code>padding: 20px;</code> and <code>border: 3px solid #2563eb;</code>.
+          </div>
+          <div class="mission-hint-box" id="mission-hint-box">
+            <!-- Hint text populated dynamically -->
+          </div>
+        </div>
+
+        <!-- 2-Column Code Workbench (Editor on Left, Live Preview on Right) -->
+        <div class="workbench-grid">
+          
+          <!-- Column 1: Live Code Editor -->
+          <div class="editor-pane">
+            <div class="editor-window">
+              <div class="editor-window-bar">
+                <div class="window-dots">
+                  <span class="dot dot-red"></span>
+                  <span class="dot dot-yellow"></span>
+                  <span class="dot dot-green"></span>
+                </div>
+                <div class="editor-filename">styles.css &mdash; Live CSS Editor</div>
+                <div style="font-size: 0.75rem; color: #64748b;">Type &amp; Test</div>
+              </div>
+              <textarea id="academy-code-editor" class="code-textarea" spellcheck="false" placeholder="/* Type your CSS code here... */"></textarea>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="editor-actions">
+              <button type="button" class="btn-check-code" onclick="checkCurrentLesson()">
+                <span>&#10004;</span> Check Answer
+              </button>
+              <button type="button" class="btn-hint" onclick="toggleHint()">
+                <span>&#128161;</span> Need a Hint?
+              </button>
+              <button type="button" class="btn-reset" onclick="resetCurrentLesson()">
+                <span>&#8634;</span> Reset Code
+              </button>
+            </div>
+          </div>
+
+          <!-- Column 2: Live Preview Window -->
+          <div class="preview-pane">
+            <div class="preview-window-label">
+              <span>Live Visual Preview</span>
+              <span style="font-weight: normal; color: #059669;">&#9679; Updates Instantly</span>
+            </div>
+            
+            <div class="preview-stage" id="preview-stage-area">
+              <!-- Target Element Styled by Student's Code -->
+              <div id="academy-target">
+                <!-- Content injected dynamically per lesson -->
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /.workbench-grid -->
+
+        <!-- Feedback Banner (Shows Success Chime or Helpful Hint) -->
+        <div class="feedback-card" id="feedback-panel">
+          <div class="feedback-content">
+            <div class="feedback-text" id="feedback-message-text"></div>
+            <button type="button" class="btn-next-lesson" id="btn-next-lesson-step" onclick="goToNextLesson()">
+              Next Lesson &#10140;
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==================================================================
+           SECTION: 4 DIFFERENT TYPES OF FONTS
+           ================================================================== -->
+      <section id="fonts">
+        <h2>4 Different Types of Fonts</h2>
+        <p class="prose-readable">
+          Fonts give your website personality. Here are the 4 main types used in web design:
+        </p>
+
+        <div class="font-grid">
+          <!-- 1. Sans-serif -->
+          <div class="font-card">
+            <h4>1. Sans-Serif (Modern &amp; Clean)</h4>
+            <div class="font-specimen font-sans">
+              "Inter" — No little lines on letter edges. Easy to read on phones and laptops.
+            </div>
+            <div class="font-css-rule">font-family: 'Inter', sans-serif;</div>
+          </div>
+
+          <!-- 2. Serif -->
+          <div class="font-card">
+            <h4>2. Serif (Classic &amp; Formal)</h4>
+            <div class="font-specimen font-serif">
+              "Playfair Display" — Has small feet/strokes at letter tips. Looks like books and newspapers.
+            </div>
+            <div class="font-css-rule">font-family: 'Playfair Display', serif;</div>
+          </div>
+
+          <!-- 3. Monospace -->
+          <div class="font-card">
+            <h4>3. Monospace (Coding Font)</h4>
+            <div class="font-specimen font-mono">
+              "Fira Code" — Every letter has the exact same width. Used by programmers for code.
+            </div>
+            <div class="font-css-rule">font-family: 'Fira Code', monospace;</div>
+          </div>
+
+          <!-- 4. Cursive / Handwriting -->
+          <div class="font-card">
+            <h4>4. Handwriting (Friendly &amp; Fun)</h4>
+            <div class="font-specimen font-cursive">
+              "Caveat" — Looks like real hand writing. Good for notes, logos, and signatures.
+            </div>
+            <div class="font-css-rule">font-family: 'Caveat', cursive;</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           SECTION 1: THE BOX MODEL
+           ================================================================== -->
+      <section id="box-model">
+        <h2>1. The Box Model (How Elements Are Sized)</h2>
+        <p class="prose-readable">
+          Think of every HTML element as a <strong>gift box</strong>:
+        </p>
+
+        <!-- Visual Box Model diagram -->
+        <div class="box-model-demo">
+          <strong>1. Margin (Orange)</strong> &mdash; Empty space <em>outside</em> the box to push other boxes away.
+          <div class="layer-border">
+            <strong>2. Border (Yellow)</strong> &mdash; The line or wall around your box.
+            <div class="layer-padding">
+              <strong>3. Padding (Green)</strong> &mdash; Space <em>inside</em> the box so text doesn't touch the wall.
+              <div class="layer-content">
+                <strong>4. Content (Blue)</strong> &mdash; The actual text or photo inside!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="prose-readable">
+          <strong>Simple Rule:</strong> Always use <code>box-sizing: border-box;</code> in CSS.
+          That way, if you say <code>width: 300px;</code>, it stays 300px even if you add padding or borders!
+        </p>
+      </section>
+
+      <!-- ==================================================================
+           SECTION 2: BLOCK VS INLINE
+           ================================================================== -->
+      <section id="flow">
+        <h2>2. Block vs Inline Elements</h2>
+        <p class="prose-readable">
+          This is how HTML elements show up by default:
+        </p>
+
+        <h3>Block Elements</h3>
+        <p>They take the <strong>full width</strong> of the line and force the next element onto a new line (e.g. &lt;div&gt;, &lt;p&gt;, &lt;h1&gt;):</p>
+        <div class="demo-block">Block Item 1 &mdash; Takes 100% width</div>
+        <div class="demo-block">Block Item 2 &mdash; Drops down to a new line</div>
+
+        <h3>Inline Elements</h3>
+        <p>They only take <strong>as much space as their words</strong> and sit side-by-side (e.g. &lt;span&gt;, &lt;a&gt;, &lt;strong&gt;):</p>
+        <div class="inline-wrapper">
+          <span class="demo-inline">Inline Word 1</span>
+          <span class="demo-inline">Inline Word 2</span>
+          <span class="demo-inline">Inline Word 3</span>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           SECTION 3: FLEXBOX
+           ================================================================== -->
+      <section id="flexbox">
+        <h2>3. Flexbox (Easy Row Layout)</h2>
+        <p class="prose-readable">
+          Flexbox lets you put boxes in a clean row. They share space automatically.
+          If the screen becomes small (like on a mobile phone), they move to the next row!
+        </p>
+
+        <div class="flex-container">
+          <div class="flex-card">
+            <h3>Card 1</h3>
+            <p>I share space in this row with Card 2 and Card 3.</p>
+          </div>
+          <div class="flex-card">
+            <h3>Card 2</h3>
+            <p>If you resize your browser window, we adjust automatically.</p>
+          </div>
+          <div class="flex-card">
+            <h3>Card 3</h3>
+            <p>If there is not enough room, I wrap down below!</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           SECTION 4: CSS GRID
+           ================================================================== -->
+      <section id="grid">
+        <h2>4. CSS Grid (Columns and Rows)</h2>
+        <p class="prose-readable">
+          Grid is great for photo galleries or card lists.
+          It creates neat columns. If the screen is wide, it shows 3 columns; on mobile, it drops to 1 column:
+        </p>
+
+        <div class="grid-container">
+          <div class="grid-card">
+            <h3>Column 1</h3>
+            <p>Neatly aligned in a grid system.</p>
+          </div>
+          <div class="grid-card">
+            <h3>Column 2</h3>
+            <p>Same height and width as the others.</p>
+          </div>
+          <div class="grid-card">
+            <h3>Column 3</h3>
+            <p>No extra code needed for phones!</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           SECTION 5: POSITIONING
+           ================================================================== -->
+      <section id="positioning">
+        <h2>5. Positioning (Pinning Things)</h2>
+        <p class="prose-readable">
+          Look at the green box below. The green card has <code>position: relative</code> (the home base).
+          The small green badge uses <code>position: absolute</code> to stick directly on the top-right corner:
+        </p>
+
+        <div class="positioned-container">
+          <span class="badge-absolute">New Badge!</span>
+          <h3>Parent Box (position: relative)</h3>
+          <p>The badge above is pinned to my corner using <code>top: -12px; right: 16px;</code>.</p>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           SECTION 6: UNITS (px, rem, em, %)
+           ================================================================== -->
+      <section id="units">
+        <h2>6. CSS Measurement Units (px, rem, em)</h2>
+        
+        <h3>Unit 1: <code>rem</code> (Best for Text)</h3>
+        <p class="prose-readable">
+          <code>1rem</code> is normally <code>16px</code>. If a user increases text size in their browser settings,
+          everything in <code>rem</code> grows nicely.
+        </p>
+
+        <h3>Unit 2: <code>em</code> (Best for Buttons)</h3>
+        <p class="prose-readable">
+          <code>em</code> looks at the button's own text size. If the button has big text,
+          its padding grows bigger automatically:
+        </p>
+        <div>
+          <button class="btn btn-sm">Small Button (.btn-sm)</button>
+          <button class="btn btn-md">Normal Button (.btn-md)</button>
+          <button class="btn btn-lg">Large Button (.btn-lg)</button>
+        </div>
+
+        <h3>Unit 3: <code>ch</code> (Comfortable Reading Width)</h3>
+        <p class="prose-readable">
+          This text uses <code>max-width: 65ch;</code>. It means lines never become longer than ~65 letters,
+          so your eyes don't get tired reading across wide screens.
+        </p>
+      </section>
+
+      <!-- ==================================================================
+           SECTION 7: LISTS
+           ================================================================== -->
+      <section id="lists">
+        <h2>7. Lists</h2>
+
+        <h3>Bullet List (&lt;ul&gt;)</h3>
+        <ul>
+          <li>HTML (Structure)</li>
+          <li>CSS (Style &amp; Colors)</li>
+          <li>JavaScript (Interactivity)</li>
+        </ul>
+
+        <h3>Numbered List (&lt;ol&gt;)</h3>
+        <ol>
+          <li>Step 1: Write HTML</li>
+          <li>Step 2: Add CSS rules</li>
+          <li>Step 3: Test on mobile and computer</li>
+        </ol>
+
+        <h3>Nested List (List inside a list)</h3>
+        <ul>
+          <li>Frontend
+            <ol>
+              <li>HTML5</li>
+              <li>CSS3</li>
+              <li>JavaScript</li>
+            </ol>
+          </li>
+          <li>Backend
+            <ul>
+              <li>PHP</li>
+              <li>Node.js</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ==================================================================
+           SECTION 8: RESPONSIVE IMAGES
+           ================================================================== -->
+      <section id="images">
+        <h2>8. Responsive Images</h2>
+        <p class="prose-readable">
+          If you put a big photo on a mobile phone, it might push off the screen!
+          To fix this, we write <code>max-width: 100%; height: auto;</code>.
+          Now the photo shrinks safely to fit your phone:
+        </p>
+        
+        <img class="responsive-img" 
+             src="https://placehold.co/600x300/1e3a8a/ffffff?text=Responsive+Image+(Never+Overflows!)" 
+             alt="Responsive placeholder image" 
+             width="600" 
+             height="300">
+      </section>
+
+      <!-- ==================================================================
+           SECTION 9: RESPONSIVE TABLES
+           ================================================================== -->
+      <section id="table">
+        <h2>9. Responsive Table</h2>
+        <p class="prose-readable">
+          Tables can be wide. On a phone, this table lets you swipe left and right safely:
+        </p>
+        
+        <div class="table-responsive-wrapper">
+          <table>
+            <caption>Weekly Timetable</caption>
+            <thead>
+              <tr>
+                <th>Day</th>
+                <th>Subject</th>
+                <th>Lesson</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Monday</td>
+                <td>COS10026</td>
+                <td>HTML Basics</td>
+                <td>2 Hours</td>
+              </tr>
+              <tr>
+                <td>Wednesday</td>
+                <td>COS10026</td>
+                <td>CSS &amp; Box Model</td>
+                <td>2 Hours</td>
+              </tr>
+              <tr>
+                <td>Friday</td>
+                <td>COS10026</td>
+                <td>Mobile Design Practice</td>
+                <td>1 Hour</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th colspan="3">Total Time</th>
+                <td>5 Hours</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2026 Web Technologies Project &bull; Week 05 Learning Guide</p>
+    </footer>
+
+  </div><!-- /.container -->
+
+  <!-- Style tag used by JavaScript to inject student's live CSS in real time -->
+  <style id="dynamic-academy-style"></style>
+
+  <!-- ====================================================================
+       DUOLINGO ACADEMY ENGINE (JAVASCRIPT)
+       Full interactive test runner with XP, sound chimes, live preview & validation.
+       ==================================================================== -->
+  <script>
+    // 7 Structured Lessons Covering Week 5 Material
+    const lessons = [
+      {
+        id: 1,
+        title: "Lesson 1: The Box Model 🎁",
+        shortTitle: "1. Box Model",
+        icon: "🎁",
+        mission: "Your task is to give the box padding (space inside) and a clean border! Set <code>padding: 20px;</code> and <code>border: 3px solid #2563eb;</code>.",
+        hint: "Write inside the box:\n  padding: 20px;\n  border: 3px solid #2563eb;",
+        starterCode: "/* LESSON 1: The Box Model */\n#academy-target {\n  background-color: #dbeafe;\n  /* Write your code below: */\n  \n}",
+        htmlTemplate: `<h3 style="margin-top:0; color:#1e3a8a;">Gift Box</h3><p style="margin:0; color:#1e40af;">Watch padding create breathing room inside me!</p>`,
+        validate: (element, cssCode) => {
+          const style = window.getComputedStyle(element);
+          const padding = parseInt(style.paddingTop);
+          const border = parseInt(style.borderTopWidth);
+          if (padding >= 18 && padding <= 24 && border >= 2) {
+            return { pass: true, msg: "🎉 Super! You gave the box padding and a border! +20 XP" };
+          }
+          if (padding < 15) {
+            return { pass: false, msg: "Almost there! Make sure you added 'padding: 20px;'. Check the spelling and semicolon ';'!" };
+          }
+          return { pass: false, msg: "Don't forget to add 'border: 3px solid #2563eb;'!" };
+        }
+      },
+      {
+        id: 2,
+        title: "Lesson 2: Choosing Font Families 🔤",
+        shortTitle: "2. Fonts",
+        icon: "🔤",
+        mission: "Make this story look classic and formal! Set <code>font-family: 'Playfair Display', serif;</code> and <code>color: #1e3a8a;</code>.",
+        hint: "Write:\n  font-family: 'Playfair Display', serif;\n  color: #1e3a8a;",
+        starterCode: "/* LESSON 2: Font Families */\n#academy-target {\n  padding: 20px;\n  /* Write your code below: */\n  \n}",
+        htmlTemplate: `<h3 style="margin-top:0;">The Classical Novel</h3><p style="margin:0;">Once upon a time in web design, serif typography gave pages elegance and credibility.</p>`,
+        validate: (element, cssCode) => {
+          const style = window.getComputedStyle(element);
+          const font = style.fontFamily.toLowerCase();
+          if ((font.includes("playfair") || font.includes("serif") || font.includes("georgia")) && cssCode.includes("color")) {
+            return { pass: true, msg: "🎉 Wonderful! The classic serif font looks great! +20 XP" };
+          }
+          if (!font.includes("playfair") && !font.includes("serif")) {
+            return { pass: false, msg: "Make sure you wrote: font-family: 'Playfair Display', serif;" };
+          }
+          return { pass: false, msg: "Make sure you also added: color: #1e3a8a;" };
+        }
+      },
+      {
+        id: 3,
+        title: "Lesson 3: Sizing with rem and em 📏",
+        shortTitle: "3. Units",
+        icon: "📏",
+        mission: "Scale this button using <code>em</code> so its padding grows with text size! Set <code>font-size: 1.25rem;</code> and <code>padding: 0.5em 1em;</code>.",
+        hint: "Write:\n  font-size: 1.25rem;\n  padding: 0.5em 1em;",
+        starterCode: "/* LESSON 3: rem and em */\n#academy-target {\n  background-color: #2563eb;\n  color: #ffffff;\n  border-radius: 8px;\n  text-align: center;\n  cursor: pointer;\n  /* Write your code below: */\n  \n}",
+        htmlTemplate: `<button style="background:none; border:none; color:inherit; font:inherit; font-weight:700; width:100%; cursor:pointer;">Click Me (Self-scaling Button)</button>`,
+        validate: (element, cssCode) => {
+          const style = window.getComputedStyle(element);
+          const fontSize = parseFloat(style.fontSize); // 1.25rem = 20px
+          const padding = parseFloat(style.paddingTop);
+          if (fontSize >= 19 && fontSize <= 21 && (cssCode.includes("0.5em") || padding >= 9)) {
+            return { pass: true, msg: "🎉 Fantastic! The button padding now scales automatically! +20 XP" };
+          }
+          if (fontSize < 18) {
+            return { pass: false, msg: "Check font-size: did you write 'font-size: 1.25rem;'?" };
+          }
+          return { pass: false, msg: "Check padding: did you write 'padding: 0.5em 1em;'?" };
+        }
+      },
+      {
+        id: 4,
+        title: "Lesson 4: Flexbox Row Alignment ↔️",
+        shortTitle: "4. Flexbox",
+        icon: "↔️",
+        mission: "Arrange these 3 cards in a horizontal row with even spacing! Set <code>display: flex;</code> and <code>gap: 15px;</code>.",
+        hint: "Write:\n  display: flex;\n  gap: 15px;",
+        starterCode: "/* LESSON 4: Flexbox */\n#academy-target {\n  padding: 15px;\n  background-color: #f1f5f9;\n  /* Write your code below: */\n  \n}",
+        htmlTemplate: `<div style="background:#3b82f6; color:#fff; padding:10px; border-radius:6px; flex:1; text-align:center;">Card A</div><div style="background:#10b981; color:#fff; padding:10px; border-radius:6px; flex:1; text-align:center;">Card B</div><div style="background:#f59e0b; color:#fff; padding:10px; border-radius:6px; flex:1; text-align:center;">Card C</div>`,
+        validate: (element, cssCode) => {
+          const style = window.getComputedStyle(element);
+          if (style.display === "flex" && (parseInt(style.columnGap) >= 12 || cssCode.includes("15px"))) {
+            return { pass: true, msg: "🎉 Boom! You arranged the items in a flexible row! +20 XP" };
+          }
+          if (style.display !== "flex") {
+            return { pass: false, msg: "Make sure to write 'display: flex;' to turn on Flexbox mode!" };
+          }
+          return { pass: false, msg: "Add 'gap: 15px;' to create space between the cards!" };
+        }
+      },
+      {
+        id: 5,
+        title: "Lesson 5: CSS Grid (2 Columns) 🪟",
+        shortTitle: "5. Grid",
+        icon: "🪟",
+        mission: "Make a 2-column grid layout for these 4 boxes! Set <code>display: grid;</code>, <code>grid-template-columns: 1fr 1fr;</code>, and <code>gap: 10px;</code>.",
+        hint: "Write:\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 10px;",
+        starterCode: "/* LESSON 5: CSS Grid */\n#academy-target {\n  padding: 15px;\n  background-color: #f8fafc;\n  /* Write your code below: */\n  \n}",
+        htmlTemplate: `<div style="background:#bfdbfe; padding:12px; border-radius:6px; text-align:center;">Box 1</div><div style="background:#bbf7d0; padding:12px; border-radius:6px; text-align:center;">Box 2</div><div style="background:#fef08a; padding:12px; border-radius:6px; text-align:center;">Box 3</div><div style="background:#fed7aa; padding:12px; border-radius:6px; text-align:center;">Box 4</div>`,
+        validate: (element, cssCode) => {
+          const style = window.getComputedStyle(element);
+          if (style.display === "grid" && (cssCode.includes("grid-template-columns") || style.gridTemplateColumns.split(" ").length === 2)) {
+            return { pass: true, msg: "🎉 Outstanding! You mastered a 2-column CSS Grid! +20 XP" };
+          }
+          if (style.display !== "grid") {
+            return { pass: false, msg: "Make sure you set 'display: grid;'!" };
+          }
+          return { pass: false, msg: "Make sure you set 'grid-template-columns: 1fr 1fr;' and 'gap: 10px;'!" };
+        }
+      },
+      {
+        id: 6,
+        title: "Lesson 6: Absolute Positioning 📌",
+        shortTitle: "6. Position",
+        icon: "📌",
+        mission: "Pin the floating badge to the top-right corner of the parent! Set <code>position: absolute;</code>, <code>top: -10px;</code>, and <code>right: 15px;</code>.",
+        hint: "Write inside #academy-badge:\n  position: absolute;\n  top: -10px;\n  right: 15px;",
+        starterCode: "/* LESSON 6: Positioning */\n/* The parent box already has position: relative! */\n#academy-badge {\n  background-color: #16a34a;\n  color: #ffffff;\n  padding: 4px 10px;\n  border-radius: 20px;\n  font-size: 12px;\n  font-weight: bold;\n  /* Write your position code below: */\n  \n}",
+        htmlTemplate: `<span id="academy-badge">HOT DEAL!</span><h3 style="margin-top:0;">Featured Product</h3><p style="margin:0;">This card is the home base (position: relative). The badge floats on top!</p>`,
+        validate: (element, cssCode) => {
+          const badge = element.querySelector("#academy-badge");
+          if (!badge) return { pass: false, msg: "Badge not found" };
+          const style = window.getComputedStyle(badge);
+          if (style.position === "absolute" && (cssCode.includes("top") && cssCode.includes("right"))) {
+            return { pass: true, msg: "🎉 You did it! The badge is perfectly pinned to the corner! +20 XP" };
+          }
+          if (style.position !== "absolute") {
+            return { pass: false, msg: "Make sure to set 'position: absolute;' on #academy-badge!" };
+          }
+          return { pass: false, msg: "Check coordinates: did you set 'top: -10px;' and 'right: 15px;'?" };
+        }
+      },
+      {
+        id: 7,
+        title: "Lesson 7: Responsive Mobile Image 📱",
+        shortTitle: "7. Responsive",
+        icon: "📱",
+        mission: "Make this photo responsive so it never overflows small screens! Write <code>max-width: 100%;</code> and <code>height: auto;</code>.",
+        hint: "Write:\n  max-width: 100%;\n  height: auto;",
+        starterCode: "/* LESSON 7: Responsive Image */\n#academy-target img {\n  border-radius: 8px;\n  display: block;\n  /* Write your code below: */\n  \n}",
+        htmlTemplate: `<img src="https://placehold.co/400x200/1e3a8a/ffffff?text=Responsive+Image+Test" alt="Demo photo">`,
+        validate: (element, cssCode) => {
+          const img = element.querySelector("img");
+          if (!img) return { pass: false, msg: "Image not found" };
+          const style = window.getComputedStyle(img);
+          if ((style.maxWidth === "100%" || cssCode.includes("max-width: 100%")) && (style.height === "auto" || cssCode.includes("height: auto"))) {
+            return { pass: true, msg: "🏆 CONGRATULATIONS! You completed all 7 lessons and are now a CSS Master! +20 XP" };
+          }
+          return { pass: false, msg: "Make sure you wrote 'max-width: 100%;' and 'height: auto;'!" };
+        }
+      }
+    ];
+
+    // Academy State
+    let currentLessonIndex = 0;
+    let completedLessons = new Set();
+    let totalXp = 0;
+    let isSandboxMode = false;
+
+    // Web Audio API Chime (No external audio files needed!)
+    function playSuccessChime() {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const now = ctx.currentTime;
+        
+        // Note 1: C5 (523 Hz)
+        const osc1 = ctx.createOscillator();
+        const gain1 = ctx.createGain();
+        osc1.frequency.setValueAtTime(523.25, now);
+        gain1.gain.setValueAtTime(0.2, now);
+        gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+        osc1.connect(gain1);
+        gain1.connect(ctx.destination);
+        osc1.start(now);
+        osc1.stop(now + 0.3);
+
+        // Note 2: G5 (784 Hz)
+        const osc2 = ctx.createOscillator();
+        const gain2 = ctx.createGain();
+        osc2.frequency.setValueAtTime(783.99, now + 0.15);
+        gain2.gain.setValueAtTime(0.25, now + 0.15);
+        gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.55);
+        osc2.connect(gain2);
+        gain2.connect(ctx.destination);
+        osc2.start(now + 0.15);
+        osc2.stop(now + 0.55);
+      } catch (e) {
+        // Audio will quietly skip if browser requires earlier gesture
+      }
+    }
+
+    // Initialize the Academy UI
+    function initAcademy() {
+      renderStepper();
+      loadLesson(0);
+
+      // Live keystroke preview listener: updates preview instantly as user types!
+      const editor = document.getElementById("academy-code-editor");
+      editor.addEventListener("input", () => {
+        applyCssCode(editor.value);
+      });
+
+      // Enable TAB key indentation inside the textarea
+      editor.addEventListener("keydown", function(e) {
+        if (e.key === "Tab") {
+          e.preventDefault();
+          const start = this.selectionStart;
+          const end = this.selectionEnd;
+          this.value = this.value.substring(0, start) + "  " + this.value.substring(end);
+          this.selectionStart = this.selectionEnd = start + 2;
+          applyCssCode(this.value);
+        }
+      });
+    }
+
+    // Render the 7 Step Nodes
+    function renderStepper() {
+      const stepper = document.getElementById("lesson-stepper-track");
+      stepper.innerHTML = "";
+
+      lessons.forEach((lesson, index) => {
+        const node = document.createElement("button");
+        node.type = "button";
+        node.className = "step-node";
+        if (index === currentLessonIndex) node.classList.add("active");
+        if (completedLessons.has(index)) node.classList.add("completed");
+
+        const circle = document.createElement("div");
+        circle.className = "step-circle";
+        circle.innerHTML = completedLessons.has(index) ? "&#10004;" : (index + 1);
+
+        const label = document.createElement("div");
+        label.className = "step-label";
+        label.innerText = lesson.shortTitle;
+
+        node.appendChild(circle);
+        node.appendChild(label);
+
+        node.onclick = () => {
+          loadLesson(index);
+        };
+
+        stepper.appendChild(node);
+      });
+    }
+
+    // Load a specific lesson
+    function loadLesson(index) {
+      currentLessonIndex = index;
+      const lesson = lessons[index];
+
+      // Update instructions
+      document.getElementById("mission-title-text").innerHTML = `<span>${lesson.icon}</span> ${lesson.title}`;
+      document.getElementById("mission-desc-text").innerHTML = lesson.mission;
+      document.getElementById("mission-hint-box").style.display = "none";
+      document.getElementById("mission-hint-box").innerText = lesson.hint;
+
+      // Update Progress Bar
+      const percent = Math.round(((index + 1) / lessons.length) * 100);
+      document.getElementById("progress-text").innerText = `Lesson ${index + 1} of ${lessons.length}`;
+      document.getElementById("progress-percent").innerText = `${percent}% Complete`;
+      document.getElementById("progress-fill-bar").style.width = `${percent}%`;
+
+      // Update Target HTML
+      const target = document.getElementById("academy-target");
+      target.innerHTML = lesson.htmlTemplate;
+
+      // Reset feedback panel
+      const feedback = document.getElementById("feedback-panel");
+      feedback.style.display = "none";
+      feedback.className = "feedback-card";
+
+      // Populate Starter Code in Editor
+      const editor = document.getElementById("academy-code-editor");
+      editor.value = lesson.starterCode;
+
+      // Apply initial styling
+      applyCssCode(lesson.starterCode);
+
+      // Refresh Stepper highlights
+      renderStepper();
+    }
+
+    // Injects CSS code into the dynamic <style> tag
+    function applyCssCode(code) {
+      document.getElementById("dynamic-academy-style").textContent = code;
+    }
+
+    // Validate the student's solution
+    function checkCurrentLesson() {
+      const lesson = lessons[currentLessonIndex];
+      const target = document.getElementById("academy-target");
+      const editor = document.getElementById("academy-code-editor");
+      const feedback = document.getElementById("feedback-panel");
+      const feedbackMsg = document.getElementById("feedback-message-text");
+      const nextBtn = document.getElementById("btn-next-lesson-step");
+
+      const result = lesson.validate(target, editor.value);
+
+      feedback.style.display = "block";
+
+      if (result.pass) {
+        feedback.className = "feedback-card success";
+        feedbackMsg.innerText = result.msg;
+        playSuccessChime();
+
+        // Award XP once per lesson
+        if (!completedLessons.has(currentLessonIndex)) {
+          completedLessons.add(currentLessonIndex);
+          totalXp += 20;
+          updateXpBadges();
+        }
+
+        renderStepper();
+
+        // If last lesson, change next button text
+        if (currentLessonIndex === lessons.length - 1) {
+          nextBtn.innerText = "Finish Academy 🎉";
+          nextBtn.onclick = () => alert("🎓 Amazing work! You finished all CSS lessons! You can now experiment in Free Sandbox Mode.");
+        } else {
+          nextBtn.innerText = "Next Lesson ➔";
+          nextBtn.onclick = goToNextLesson;
+        }
+      } else {
+        feedback.className = "feedback-card error";
+        feedbackMsg.innerText = result.msg;
+        nextBtn.style.display = "none";
+      }
+    }
+
+    function goToNextLesson() {
+      if (currentLessonIndex < lessons.length - 1) {
+        loadLesson(currentLessonIndex + 1);
+      }
+    }
+
+    function toggleHint() {
+      const hintBox = document.getElementById("mission-hint-box");
+      hintBox.style.display = hintBox.style.display === "block" ? "none" : "block";
+    }
+
+    function resetCurrentLesson() {
+      loadLesson(currentLessonIndex);
+    }
+
+    function updateXpBadges() {
+      document.getElementById("stat-xp-display").innerHTML = `&#9889; ${totalXp} XP`;
+
+      let levelName = "Level 1: Rookie Coder";
+      if (totalXp >= 120) levelName = "Level 4: CSS Grandmaster 👑";
+      else if (totalXp >= 80) levelName = "Level 3: Layout Wizard 🌲";
+      else if (totalXp >= 40) levelName = "Level 2: Box Explorer 🌿";
+
+      document.getElementById("stat-level-display").innerHTML = `&#127942; ${levelName}`;
+    }
+
+    // Toggle between Lessons and Free Sandbox Mode
+    function switchAcademyMode(mode) {
+      const lessonsBtn = document.getElementById("tab-lessons-btn");
+      const sandboxBtn = document.getElementById("tab-sandbox-btn");
+      const missionCard = document.getElementById("mission-card-box");
+      const feedback = document.getElementById("feedback-panel");
+      feedback.style.display = "none";
+
+      if (mode === "sandbox") {
+        isSandboxMode = true;
+        lessonsBtn.classList.remove("active");
+        sandboxBtn.classList.add("active");
+        missionCard.style.display = "block";
+        document.getElementById("mission-title-text").innerHTML = "<span>🎨</span> Free Play Sandbox Mode";
+        document.getElementById("mission-desc-text").innerHTML = "You have total freedom! Write any CSS rules you want on <code>#academy-target</code>, create buttons, test colors, fonts, or responsive tricks!";
+        document.getElementById("mission-hint-box").style.display = "none";
+
+        const editor = document.getElementById("academy-code-editor");
+        editor.value = "/* FREE PLAY SANDBOX */\n#academy-target {\n  background: linear-gradient(135deg, #3b82f6, #06b6d4);\n  color: #ffffff;\n  padding: 25px;\n  border-radius: 16px;\n  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);\n  font-family: 'Inter', sans-serif;\n  text-align: center;\n}";
+        
+        document.getElementById("academy-target").innerHTML = `
+          <h2 style="margin:0 0 10px 0; color:#fff;">Welcome to Free Sandbox!</h2>
+          <p style="margin:0 0 15px 0;">Write any CSS on the left and see it update right here!</p>
+          <button style="padding:10px 20px; background:#fff; color:#0284c7; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">Cool Button</button>
+        `;
+        applyCssCode(editor.value);
+      } else {
+        isSandboxMode = false;
+        sandboxBtn.classList.remove("active");
+        lessonsBtn.classList.add("active");
+        missionCard.style.display = "block";
+        loadLesson(currentLessonIndex);
+      }
+    }
+
+    // Boot up the academy when the DOM is ready
+    document.addEventListener("DOMContentLoaded", initAcademy);
+  </script>
+
+</body>
+</html>
